@@ -3,8 +3,8 @@ const Web3 = require ('web3');
 const { interface, bytecode } = require('./compile');
 
 const provider = new HDWalletProvider(
-  'cat reunion vanish frozen rural survey bacon food august model camp height',
-  'https://rinkeby.infura.io/v3/9879eb4f74344288a34a97834fcbc6b4'
+  process.env.ACCOUNTETH,
+  process.env.INFURAKEY
 );
 
 const web3 = new Web3(provider);
@@ -18,7 +18,7 @@ const deploy = async () => {
     .deploy({ data: '0x' + bytecode })
     .send({ from: accounts[0] }); //removed gas because 0.0.5 trufhdwalletprovider
 
-  console.log(interface);  
+  console.log(interface);
   console.log('Contract deployed to', result.options.address);
 };
 deploy();
